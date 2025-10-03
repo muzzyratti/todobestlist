@@ -1,6 +1,6 @@
 export default class Task {
-  constructor(parentProject, id = crypto.randomUUID(), taskName, description, dueDate, priority) {
-    this.parentProject = parentProject;
+  constructor(projectName, id = crypto.randomUUID(), taskName, description, dueDate, priority) {
+    this.parentProject = projectName;
     this.id = id;
     this.taskName = taskName;
     this.description = description;
