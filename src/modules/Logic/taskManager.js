@@ -13,7 +13,8 @@ class TaskManager {
             taskData.taskName,
             taskData.description,
             taskData.dueDate,
-            taskData.priority
+            taskData.priority,
+            taskData.taskStatus
         );
 
         project.taskList.push(newTask);

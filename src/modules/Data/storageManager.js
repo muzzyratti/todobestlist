@@ -10,7 +10,7 @@ export function loadData () {
     if (!data) return;
 
     ProjectManager.projectList = [];
-    
+
     const parsedData = JSON.parse(data);
     
     parsedData.forEach (projectData => {
@@ -23,7 +23,8 @@ export function loadData () {
                 taskData.taskName, 
                 taskData.description, 
                 taskData.dueDate, 
-                taskData.priority
+                taskData.priority,
+                taskData.taskStatus
             );
 
             project.taskList.push(task);
@@ -42,7 +43,8 @@ export function saveData() {
       taskName: task.taskName,
       description: task.description,
       dueDate: task.dueDate,
-      priority: task.priority
+      priority: task.priority,
+      Status: task.taskStatus
     }))
   }));
 

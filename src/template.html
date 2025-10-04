@@ -7,7 +7,107 @@
 </head>
 <body>
     <div id="app">
-        Developing in progress...
+        <div class="nav">
+
+            <div class="nav-header">
+                <h1>Todo Best List</h1>
+            </div>
+        </div>
+        
+        <div class="main-content">
+
+            <div class="sidebar-projects">
+                <h2>Projects</h2>
+                <button id="add-project-btn">Add+</button>
+                <ul id="project-list">
+                    <!-- Project items will be dynamically added here -->
+                </ul>
+            </div>
+
+            <div class="tasks-section">
+
+                <h2 id="current-project-name">Tasks</h2>
+
+                <div class="tasklists">
+                     <div class="to-do-list">
+                        <h2>To Do</h2>
+                        <button id="add-task-btn">Add+</button>
+                        <ul id="to-do-list">
+                            <!-- To-do task items will be dynamically added here -->
+                        </ul>
+                     </div>
+
+                <div class="in-progress-list">
+                    <h2>In Progress</h2>
+                    <ul id="in-progress-list">
+                        <!-- In-progress task items will be dynamically added here -->
+                    </ul>
+                </div>
+
+                <div class="done-list">
+                    <h2>Done</h2>
+                    <ul id="done-list">
+                        <!-- Done task items will be dynamically added here -->
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
+
+    <dialog class="project-modal">
+        <form method="dialog" id="add-project-form">
+            <div>
+                <label for="project-name">Project Name <span>*</span></label>
+                <input type="text" id="project-name" name="project-name" required>
+            </div>
+            
+            <div>
+                <button type="submit" class="add-btns">Add Project</button>
+                <button type="button" class="cancel-btns">Cancel</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog id="task-modal">
+        <form id="add-task-form" method="dialog">
+            <div>
+                <label for="task-name">Task Name <span>*</span></label>
+                <input type="text" name="task-name" id="name" required>
+            </div>
+            
+            <div>
+                <label for="description">Description</label>
+                <textarea name="description" id="description"></textarea>
+            </div>
+            <div>
+                <label for="dueDate">Due Date</label>
+                <input type="date" name="dueDate" id="dueDate">
+            </div>
+            <div>
+                <label for="priority">Priority</label>
+                <select name="priority" id="priority">
+                    <option value="low" selected>Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+            <div>
+                <label for="taskStatus">Status</label>
+                <select name="cars" id="cars" multiple>
+                    <option value="todo">To do</option>
+                    <option value="inProgress">In progress</option>
+                    <option value="done">Done</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit" class="add-btns">Add Task</button>
+                <button type="button" class="cancel-btns">Cancel</button>
+            </div>
+        </form>
+    </dialog>
+
 </body>
 </html>
