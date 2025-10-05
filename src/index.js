@@ -2,9 +2,10 @@ import ProjectManager from './modules/Logic/projectManager.js';
 import Project from './modules/Logic/projectConstructor.js';
 import TaskManager from './modules/Logic/taskManager.js';
 import { loadData, saveData } from './modules/Data/storageManager.js';
+import ProjectListUI from './UI/projectListUI.js';
+import TaskListUI from './UI/taskListUI.js';
 
-
-function initializeAppData() {
+function initAppData() {
     loadData();
 
     // If no projects exist, create a default project
@@ -25,4 +26,28 @@ function initializeAppData() {
     }
   }
 
-initializeAppData();
+initAppData();
+
+let currentProject = null;
+
+// --- 2. Init UI Layer ---
+function initAppUI() {
+    ProjectListUI.renderProjects(onProjectSelect); // Передаём callback
+
+    const first = ProjectManager.getAllProjects()[0];
+    if (first) selectProject(first.projectName);
+}
+
+// --- Select Project ---
+function selectProject(projectName) {
+    currentProject = projectName;
+    TaskListUI.renderTasks(currentProject);
+    ProjectListUI.highlightProject(currentProject);
+}
+
+// --- Callback for UI ---
+function onProjectSelect(projectName) {
+    selectProject(projectName);
+}
+
+initAppUI();
