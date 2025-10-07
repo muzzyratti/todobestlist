@@ -1,5 +1,0 @@
-выводит форму для создания или редактирования задачи
-
-renderTaskForm
-handleTaskFormSubmit
-handleTaskFormCancel

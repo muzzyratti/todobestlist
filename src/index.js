@@ -2,8 +2,8 @@ import ProjectManager from './modules/Logic/projectManager.js';
 import Project from './modules/Logic/projectConstructor.js';
 import TaskManager from './modules/Logic/taskManager.js';
 import { loadData, saveData } from './modules/Data/storageManager.js';
-import ProjectListUI from './UI/projectListUI.js';
-import TaskListUI from './UI/taskListUI.js';
+import ProjectsUI from './modules/UI/projectsUI.js';
+import TasksUI from './modules/UI/tasksUI.js';
 
 function initAppData() {
     loadData();
@@ -20,7 +20,7 @@ function initAppData() {
             description: 'This is a sample task description.',
             dueDate: new Date().toISOString().split('T')[0],
             priority: 'Medium',
-            taskStatus: 'Incomplete'
+            taskStatus: 'To Do'
         });
         saveData();
     }
@@ -32,7 +32,7 @@ let currentProject = null;
 
 // --- 2. Init UI Layer ---
 function initAppUI() {
-    ProjectListUI.renderProjects(onProjectSelect); // Передаём callback
+    ProjectsUI.renderProjectsList(onProjectSelect);
 
     const first = ProjectManager.getAllProjects()[0];
     if (first) selectProject(first.projectName);
@@ -41,8 +41,8 @@ function initAppUI() {
 // --- Select Project ---
 function selectProject(projectName) {
     currentProject = projectName;
-    TaskListUI.renderTasks(currentProject);
-    ProjectListUI.highlightProject(currentProject);
+    TasksUI.renderTasksList(currentProject);
+    ProjectsUI.highlightProject(currentProject);
 }
 
 // --- Callback for UI ---
