@@ -6,6 +6,6 @@ export default class Task {
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
-    this.taskStatus = taskStatus || 'To Do';
+    this.taskStatus = taskStatus;
   }
 }

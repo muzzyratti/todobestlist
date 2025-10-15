@@ -44,7 +44,7 @@ export function saveData() {
       description: task.description,
       dueDate: task.dueDate,
       priority: task.priority,
-      Status: task.taskStatus
+      taskStatus: task.taskStatus
     }))
   }));
 

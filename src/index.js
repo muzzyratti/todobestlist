@@ -4,6 +4,11 @@ import TaskManager from './modules/Logic/taskManager.js';
 import { loadData, saveData } from './modules/Data/storageManager.js';
 import ProjectsUI from './modules/UI/projectsUI.js';
 import TasksUI from './modules/UI/tasksUI.js';
+import TasksFormUI from './modules/UI/tasksFormUI.js';
+import ProjectsFormUI from './modules/UI/projectsFormUI.js';
+
+import "./styles.css";
+
 
 function initAppData() {
     loadData();
@@ -50,4 +55,16 @@ function onProjectSelect(projectName) {
     selectProject(projectName);
 }
 
+function refreshProjectsList() {
+  ProjectsUI.renderProjectsList(onProjectSelect);
+}
+
 initAppUI();
+
+// --- Getter for current project name ---
+function getCurrentProjectName() {
+  return currentProject;
+}
+
+ProjectsFormUI.initProjectsFormUI(selectProject, refreshProjectsList);
+TasksFormUI.initTasksFormUI(getCurrentProjectName, TasksUI.renderTasksList);

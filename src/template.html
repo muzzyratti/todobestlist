@@ -57,7 +57,7 @@
 
     </div>
 
-    <dialog class="project-modal">
+    <dialog id="project-modal">
         <form method="dialog" id="add-project-form">
             <div>
                 <label for="project-name">Project Name <span>*</span></label>
@@ -66,16 +66,16 @@
             
             <div>
                 <button type="submit" class="add-btns">Add Project</button>
-                <button type="button" class="cancel-btns">Cancel</button>
+                <button type="button" class="project-cancel-btn">Cancel</button>
             </div>
         </form>
     </dialog>
 
     <dialog id="task-modal">
-        <form id="add-task-form" method="dialog">
+        <form method="dialog" id="add-task-form">
             <div>
                 <label for="task-name">Task Name <span>*</span></label>
-                <input type="text" name="task-name" id="name" required>
+                <input type="text" name="task-name" id="task-name" required>
             </div>
             
             <div>
@@ -89,22 +89,22 @@
             <div>
                 <label for="priority">Priority</label>
                 <select name="priority" id="priority">
-                    <option value="low" selected>Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium" selected>Medium</option>
+                    <option value="High">High</option>
                 </select>
             </div>
             <div>
                 <label for="taskStatus">Status</label>
-                <select name="taskStatus" id="taskStatus" multiple>
-                    <option value="todo">To do</option>
-                    <option value="inProgress">In progress</option>
-                    <option value="done">Done</option>
+                <select name="taskStatus" id="taskStatus">
+                    <option value="To Do" selected>To do</option>
+                    <option value="In Progress">In progress</option>
+                    <option value="Done">Done</option>
                 </select>
             </div>
             <div>
-                <button type="submit" class="add-btns">Add Task</button>
-                <button type="button" class="cancel-btns">Cancel</button>
+                <button type="submit" class="add-btns">Save Task</button>
+                <button type="button" class="task-cancel-btn">Cancel</button>
             </div>
         </form>
     </dialog>
