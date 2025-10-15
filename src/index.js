@@ -37,17 +37,21 @@ let currentProject = null;
 
 // --- 2. Init UI Layer ---
 function initAppUI() {
-    ProjectsUI.renderProjectsList(onProjectSelect);
+  ProjectsUI.renderProjectsList(onProjectSelect, currentProject);
 
-    const first = ProjectManager.getAllProjects()[0];
-    if (first) selectProject(first.projectName);
+  const first = ProjectManager.getAllProjects()[0];
+  if (first) selectProject(first.projectName);
 }
 
 // --- Select Project ---
 function selectProject(projectName) {
-    currentProject = projectName;
-    TasksUI.renderTasksList(currentProject);
-    ProjectsUI.highlightProject(currentProject);
+  currentProject = projectName;
+
+  const titleEl = document.getElementById('current-project-name');
+  if (titleEl) titleEl.textContent = `Tasks — ${projectName}`;
+
+  TasksUI.renderTasksList(currentProject);
+  ProjectsUI.renderProjectsList(onProjectSelect, currentProject);
 }
 
 // --- Callback for UI ---
