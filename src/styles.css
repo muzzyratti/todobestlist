@@ -24,3 +24,213 @@
   opacity: 1;
   transform: scale(1.1);
 }
+
+
+@media (max-width: 768px) {
+  .tasklists {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .tasklists > div {
+    flex: 0 0 85%;
+  }
+}
+
+.tasklists {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px;
+  overflow-x: auto;
+}
+
+.tasklists > div {
+  flex: 1;
+  min-width: 280px;
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tasklists h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.tasklists ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.task-item {
+  background: #fff;
+  border-radius: 6px;
+  padding: 8px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  cursor: grab;
+  transition: transform 0.1s ease, background 0.1s ease;
+}
+
+.task-item:hover {
+  transform: scale(1.02);
+  background: #f9f9f9;
+}
+
+/* ====== базовая тема ====== */
+:root{
+  --bg:#ffffff;
+  --text:#0f172a;
+  --muted:#6b7280;
+  --card:#ffffff;
+  --panel:#f7f8fa;
+  --border:#e5e7eb;
+  --accent:#2563eb;
+  --accent-weak:#dbeafe;
+  --shadow: 0 1px 2px rgba(0,0,0,0.05);
+  --radius:12px;
+  --gap:16px;
+  --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+}
+
+*{box-sizing: border-box}
+html,body{height:100%}
+body{
+  margin:0; background:var(--bg); color:var(--text); font-family:var(--font);
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+}
+
+/* ====== контейнер и шапка ====== */
+#app{max-width:1100px; margin:0 auto; padding:24px;}
+.nav-header h1{margin:0 0 16px; font-size:28px; font-weight:800;}
+
+/* ====== раскладка: сайдбар + доска ====== */
+.main-content{
+  display:flex; gap:var(--gap);
+}
+.sidebar-projects{
+  width:260px; flex:0 0 260px;
+}
+.tasks-section{
+  flex:1; min-width:0;
+}
+
+/* ====== кнопки ====== */
+button{
+  border:1px solid var(--border);
+  background:var(--card);
+  border-radius:8px;
+  padding:6px 10px;
+  font-size:14px;
+  cursor:pointer;
+  transition:.15s ease;
+}
+button:hover{ box-shadow:var(--shadow); transform:translateY(-1px); }
+#add-project-btn,#add-task-btn{ margin:8px 0; }
+
+/* ====== список проектов ====== */
+#project-list{ list-style:none; margin:8px 0 0; padding:0; display:flex; flex-direction:column; gap:8px; }
+
+.project-item{
+  display:flex; align-items:center; justify-content:space-between; gap:8px;
+  padding:10px 12px; border:1px solid var(--border); border-radius:10px;
+  background:var(--card); box-shadow:var(--shadow);
+  cursor:pointer; transition:.15s ease;
+}
+.project-item:hover{ background:#fcfcfd; }
+.project-item.active{
+  background:var(--accent-weak);
+  border-color:#cfe3ff;
+  font-weight:600;
+}
+
+/* иконки у проекта */
+.project-actions{ display:inline-flex; gap:4px; align-items:center; }
+.project-actions button{
+  border:none; background:transparent; padding:4px 6px; font-size:16px; opacity:.8;
+}
+.project-actions button:hover{ opacity:1; transform:scale(1.05); }
+
+.project-actions {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.project-item:hover .project-actions {
+  opacity: 1;
+}
+
+/* ====== заголовок секции задач ====== */
+#current-project-name{
+  margin:0 0 8px; font-size:20px; font-weight:800;
+}
+
+.primary-btn {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+  font-weight: 500;
+}
+.primary-btn:hover {
+  filter: brightness(0.95);
+  transform: translateY(-1px);
+}
+
+
+
+/* ====== колонки доски ====== */
+.tasklists{
+  display:flex; gap:var(--gap); padding:8px 0 16px; align-items:flex-start;
+  overflow-x:auto;
+}
+.tasklists > div{
+  flex:1; min-width:280px;
+  background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
+  padding:12px;
+  display:flex; flex-direction:column; gap:10px;
+}
+.tasklists h2{
+  margin:0; font-size:14px; letter-spacing:.3px; text-transform:capitalize;
+  color:#111827; text-align:center;
+}
+.tasklists ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+
+/* ====== карточка задачи ====== */
+.task-item{
+  display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+  background:var(--card); border:1px solid var(--border); border-radius:10px;
+  padding:10px 12px; box-shadow:var(--shadow);
+}
+.task-item:hover{ transform:translateY(-1px); }
+.task-item .task-buttons{ display:inline-flex; gap:6px; }
+.task-item .task-buttons button{
+  border:none; background:transparent; font-size:16px; padding:4px 6px; opacity:.8;
+}
+.task-item .task-buttons button:hover{ opacity:1; transform:scale(1.05); }
+
+/* ====== диалоги (минимальная стилизация) ====== */
+dialog{
+  border:none; border-radius:12px; padding:0; overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+dialog form{ padding:16px; display:flex; flex-direction:column; gap:12px; min-width:320px; }
+dialog label{ font-size:12px; color:var(--muted); display:block; margin-bottom:4px; }
+dialog input, dialog textarea, dialog select{
+  width:100%; padding:8px 10px; border:1px solid var(--border); border-radius:8px; font-size:14px; background:var(--card);
+}
+.add-btns, .cancel-btns{
+  padding:8px 12px; border-radius:8px; border:1px solid var(--border);
+}
+.add-btns{ background:var(--accent); color:white; border-color:var(--accent); }
+.add-btns:hover{ filter:brightness(0.98); } 
+.cancel-btns{ background:var(--card); }
