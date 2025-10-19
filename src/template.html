@@ -10,7 +10,7 @@
         <div class="nav">
 
             <div class="nav-header">
-                <h1>Todo Best List</h1>
+                <h1>Man, just do it</h1>
             </div>
         </div>
         
@@ -64,7 +64,7 @@
             </div>
             
             <div>
-                <button type="submit" class="add-btns">Add Project</button>
+                <button type="submit" class="add-btns">Save Project</button>
                 <button type="button" class="project-cancel-btn">Cancel</button>
             </div>
         </form>
@@ -101,9 +101,12 @@
                     <option value="Done">Done</option>
                 </select>
             </div>
-            <div>
-                <button type="submit" class="add-btns">Save Task</button>
-                <button type="button" class="task-cancel-btn">Cancel</button>
+            <div class="task-modal-actions">
+                <div class="left-buttons">
+                    <button type="submit" class="add-btns">Save Task</button>
+                    <button type="button" id="task-cancel-btn" class="cancel-btns">Cancel</button>
+                </div>
+                <button type="button" id="delete-task-btn" class="delete-task-btn">🗑️</button>
             </div>
         </form>
     </dialog>

@@ -1,178 +1,93 @@
-.project-item {
-  cursor: pointer;
-  padding: 6px 10px;
-  border-radius: 6px;
-}
-.project-item:hover { background: #f3f3f3; }
-.project-item.active { background: #d1e8ff; font-weight: 600; }
-
-.project-actions {
-  margin-left: 8px;
-  display: inline-flex;
-  gap: 4px;
-}
-
-.project-actions button {
-  border: none;
-  background: none;
-  cursor: pointer;
-  font-size: 14px;
-  opacity: 0.8;
+/* =========================================================
+   🎨 THEME VARIABLES
+   ========================================================= */
+:root {
+  --bg: #ffffff;
+  --text: #0f172a;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --panel: #f7f8fa;
+  --border: #e5e7eb;
+  --accent: #2563eb;
+  --accent-weak: #dbeafe;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --radius: 12px;
+  --gap: 16px;
+  --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu,
+    "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
 }
 
-.project-actions button:hover {
-  opacity: 1;
-  transform: scale(1.1);
+/* =========================================================
+   🧱 GLOBAL RESETS
+   ========================================================= */
+* {
+  box-sizing: border-box;
 }
-
-
-@media (max-width: 768px) {
-  .tasklists {
-    flex-direction: row;
-    overflow-x: auto;
-  }
-
-  .tasklists > div {
-    flex: 0 0 85%;
-  }
-}
-
-.tasklists {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 16px;
-  overflow-x: auto;
-}
-
-.tasklists > div {
-  flex: 1;
-  min-width: 280px;
-  background: #fafafa;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-}
-
-.tasklists h2 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-  text-align: center;
-}
-
-.tasklists ul {
-  list-style: none;
+html,
+body {
+  height: 100%;
   margin: 0;
-  padding: 0;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =========================================================
+   🧭 LAYOUT
+   ========================================================= */
+#app {
+  width: 90%;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.main-content {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  gap: var(--gap);
+  align-items: flex-start;
+  width: 100%;
+  overflow-x: visible; /* prevent column clipping */
 }
 
-.task-item {
-  background: #fff;
-  border-radius: 6px;
-  padding: 8px;
-  border: 1px solid #e0e0e0;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-  cursor: grab;
-  transition: transform 0.1s ease, background 0.1s ease;
+.sidebar-projects {
+  width: 260px;
+  flex: 0 0 260px;
 }
 
-.task-item:hover {
-  transform: scale(1.02);
-  background: #f9f9f9;
+.tasks-section {
+  flex: 1;
+  min-width: 0;
 }
 
-/* ====== базовая тема ====== */
-:root{
-  --bg:#ffffff;
-  --text:#0f172a;
-  --muted:#6b7280;
-  --card:#ffffff;
-  --panel:#f7f8fa;
-  --border:#e5e7eb;
-  --accent:#2563eb;
-  --accent-weak:#dbeafe;
-  --shadow: 0 1px 2px rgba(0,0,0,0.05);
-  --radius:12px;
-  --gap:16px;
-  --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+/* =========================================================
+   🧩 NAV HEADER
+   ========================================================= */
+.nav-header h1 {
+  margin: 0 0 16px;
+  font-size: 28px;
+  font-weight: 800;
 }
 
-*{box-sizing: border-box}
-html,body{height:100%}
-body{
-  margin:0; background:var(--bg); color:var(--text); font-family:var(--font);
-  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+/* =========================================================
+   🧰 BUTTONS
+   ========================================================= */
+button {
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.15s ease;
 }
 
-/* ====== контейнер и шапка ====== */
-#app{max-width:1100px; margin:0 auto; padding:24px;}
-.nav-header h1{margin:0 0 16px; font-size:28px; font-weight:800;}
-
-/* ====== раскладка: сайдбар + доска ====== */
-.main-content{
-  display:flex; gap:var(--gap);
-}
-.sidebar-projects{
-  width:260px; flex:0 0 260px;
-}
-.tasks-section{
-  flex:1; min-width:0;
-}
-
-/* ====== кнопки ====== */
-button{
-  border:1px solid var(--border);
-  background:var(--card);
-  border-radius:8px;
-  padding:6px 10px;
-  font-size:14px;
-  cursor:pointer;
-  transition:.15s ease;
-}
-button:hover{ box-shadow:var(--shadow); transform:translateY(-1px); }
-#add-project-btn,#add-task-btn{ margin:8px 0; }
-
-/* ====== список проектов ====== */
-#project-list{ list-style:none; margin:8px 0 0; padding:0; display:flex; flex-direction:column; gap:8px; }
-
-.project-item{
-  display:flex; align-items:center; justify-content:space-between; gap:8px;
-  padding:10px 12px; border:1px solid var(--border); border-radius:10px;
-  background:var(--card); box-shadow:var(--shadow);
-  cursor:pointer; transition:.15s ease;
-}
-.project-item:hover{ background:#fcfcfd; }
-.project-item.active{
-  background:var(--accent-weak);
-  border-color:#cfe3ff;
-  font-weight:600;
-}
-
-/* иконки у проекта */
-.project-actions{ display:inline-flex; gap:4px; align-items:center; }
-.project-actions button{
-  border:none; background:transparent; padding:4px 6px; font-size:16px; opacity:.8;
-}
-.project-actions button:hover{ opacity:1; transform:scale(1.05); }
-
-.project-actions {
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-.project-item:hover .project-actions {
-  opacity: 1;
-}
-
-/* ====== заголовок секции задач ====== */
-#current-project-name{
-  margin:0 0 8px; font-size:20px; font-weight:800;
+button:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
 }
 
 .primary-btn {
@@ -183,54 +98,287 @@ button:hover{ box-shadow:var(--shadow); transform:translateY(-1px); }
 }
 .primary-btn:hover {
   filter: brightness(0.95);
+}
+
+#add-project-btn,
+#add-task-btn {
+  margin: 8px 0;
+}
+
+/* =========================================================
+   📁 PROJECT LIST
+   ========================================================= */
+#project-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.project-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  transition: 0.15s ease;
+  cursor: pointer;
+}
+
+.project-item:hover {
+  background: #fcfcfd;
+}
+
+.project-item.active {
+  background: var(--accent-weak);
+  border-color: #cfe3ff;
+  font-weight: 600;
+}
+
+/* Project action icons (edit / delete) */
+.project-actions {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.project-item:hover .project-actions {
+  opacity: 1;
+}
+
+.project-actions button {
+  border: none;
+  background: transparent;
+  padding: 4px 6px;
+  font-size: 16px;
+  opacity: 0.8;
+}
+.project-actions button:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* =========================================================
+   🗂️ TASK BOARD COLUMNS
+   ========================================================= */
+.tasklists {
+  display: flex;
+  gap: var(--gap);
+  padding: 8px 0 16px;
+  align-items: flex-start;
+  overflow-x: auto;
+}
+
+.tasklists > div {
+  flex: 1;
+  min-width: 280px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tasklists h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  text-transform: capitalize;
+  color: #111827;
+}
+
+.tasklists ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* =========================================================
+   ✅ TASK CARDS
+   ========================================================= */
+.task-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.task-item:hover {
+  background: #f9fafb;
   transform: translateY(-1px);
 }
 
+.task-title {
+  font-weight: 500;
+  color: #111827;
+  margin-bottom: 6px;
+}
 
+.task-meta {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
 
-/* ====== колонки доски ====== */
-.tasklists{
-  display:flex; gap:var(--gap); padding:8px 0 16px; align-items:flex-start;
-  overflow-x:auto;
+/* Priority & date tags */
+.tag {
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  background: #f3f4f6;
+  color: #374151;
 }
-.tasklists > div{
-  flex:1; min-width:280px;
-  background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
-  padding:12px;
-  display:flex; flex-direction:column; gap:10px;
-}
-.tasklists h2{
-  margin:0; font-size:14px; letter-spacing:.3px; text-transform:capitalize;
-  color:#111827; text-align:center;
-}
-.tasklists ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
 
-/* ====== карточка задачи ====== */
-.task-item{
-  display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
-  background:var(--card); border:1px solid var(--border); border-radius:10px;
-  padding:10px 12px; box-shadow:var(--shadow);
+.priority-low {
+  background: #ecfdf5;
+  color: #065f46;
+  border-color: #a7f3d0;
 }
-.task-item:hover{ transform:translateY(-1px); }
-.task-item .task-buttons{ display:inline-flex; gap:6px; }
-.task-item .task-buttons button{
-  border:none; background:transparent; font-size:16px; padding:4px 6px; opacity:.8;
+.priority-medium {
+  background: #eff6ff;
+  color: #1e40af;
+  border-color: #bfdbfe;
 }
-.task-item .task-buttons button:hover{ opacity:1; transform:scale(1.05); }
+.priority-high {
+  background: #fef2f2;
+  color: #991b1b;
+  border-color: #fecaca;
+}
+.date-tag {
+  background: #f9fafb;
+  color: #4b5563;
+}
 
-/* ====== диалоги (минимальная стилизация) ====== */
-dialog{
-  border:none; border-radius:12px; padding:0; overflow:hidden;
-  box-shadow:0 10px 30px rgba(0,0,0,.15);
+/* =========================================================
+   🪟 MODAL WINDOWS
+   ========================================================= */
+dialog {
+  border: none;
+  border-radius: 12px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
-dialog form{ padding:16px; display:flex; flex-direction:column; gap:12px; min-width:320px; }
-dialog label{ font-size:12px; color:var(--muted); display:block; margin-bottom:4px; }
-dialog input, dialog textarea, dialog select{
-  width:100%; padding:8px 10px; border:1px solid var(--border); border-radius:8px; font-size:14px; background:var(--card);
+
+dialog form {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 320px;
 }
-.add-btns, .cancel-btns{
-  padding:8px 12px; border-radius:8px; border:1px solid var(--border);
+
+dialog label {
+  font-size: 12px;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 4px;
 }
-.add-btns{ background:var(--accent); color:white; border-color:var(--accent); }
-.add-btns:hover{ filter:brightness(0.98); } 
-.cancel-btns{ background:var(--card); }
+
+dialog input,
+dialog textarea,
+dialog select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  background: var(--card);
+}
+
+/* Form buttons layout */
+/* === Modal form button row (Save / Cancel / Delete) === */
+.task-modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.left-buttons {
+  display: flex;
+  gap: 8px;
+  flex-grow: 1;
+}
+
+.delete-task-btn {
+  margin-left: auto;           /* pushes icon to the right edge */
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  opacity: 0.6;
+  transition: 0.2s;
+}
+
+.delete-task-btn:hover {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+.add-btns,
+.cancel-btns,
+.delete-task-btn {
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.add-btns {
+  background: #3b5bff;
+  color: white;
+  border: none;
+  padding: 0 16px;
+}
+
+.cancel-btns {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 0 14px;
+}
+
+.delete-task-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: 0.2s;
+}
+.delete-task-btn:hover {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+/* =========================================================
+   📱 RESPONSIVE
+   ========================================================= */
+@media (max-width: 768px) {
+  .tasklists {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+  .tasklists > div {
+    flex: 0 0 85%;
+  }
+}

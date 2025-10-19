@@ -1,4 +1,3 @@
-// src/modules/UI/tasksFormUI.js
 import TaskManager from '../Logic/taskManager.js';
 import { saveData } from '../Data/storageManager.js';
 
@@ -20,10 +19,7 @@ function initTasksFormUI(getProjectNameFn, refreshCb) {
   formEl = document.getElementById('add-task-form');
   cancelBtnEl = document.querySelectorAll('.task-cancel-btn');
 
-  if (!formEl || !taskModalEl || !addTaskBtnEl) {
-    console.warn('tasksFormUI: missing DOM elements (task-modal, add-task-btn, add-task-form). Init aborted.');
-    return;
-  }
+  if (!formEl || !taskModalEl || !addTaskBtnEl) return;
 
   addTaskBtnEl.addEventListener('click', () => openTaskModal(null));
   cancelBtnEl.forEach(btn => btn.addEventListener('click', closeModal));
@@ -46,6 +42,30 @@ function openTaskModal(task = null) {
     formEl['priority'].value = 'Medium';
   }
 
+  const existingDeleteBtn = formEl.querySelector('.delete-task-btn');
+  if (existingDeleteBtn) existingDeleteBtn.remove();
+
+  if (task) {
+    const deleteBtn = document.createElement('button');
+    deleteBtn.type = 'button';
+    deleteBtn.textContent = '🗑';
+    deleteBtn.classList.add('delete-task-btn');
+
+    deleteBtn.addEventListener('click', () => {
+      if (confirm('Sure?')) {
+        const projectName = getCurrentProjectName && getCurrentProjectName();
+        if (projectName) {
+          TaskManager.deleteTaskFromProject(projectName, task.id);
+          saveData();
+          if (refreshTasksCallback) refreshTasksCallback(projectName);
+          closeModal();
+        }
+      }
+    });
+
+    formEl.appendChild(deleteBtn);
+  }
+
   if (typeof taskModalEl.showModal === 'function') {
     taskModalEl.showModal();
   } else {
@@ -57,6 +77,8 @@ function closeModal() {
   if (!formEl || !taskModalEl) return;
   formEl.reset();
   editingTask = null;
+  const existingDeleteBtn = formEl.querySelector('.delete-task-btn');
+  if (existingDeleteBtn) existingDeleteBtn.remove();
   if (typeof taskModalEl.close === 'function') {
     taskModalEl.close();
   } else {

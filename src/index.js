@@ -72,3 +72,33 @@ function getCurrentProjectName() {
 
 ProjectsFormUI.initProjectsFormUI(selectProject, refreshProjectsList);
 TasksFormUI.initTasksFormUI(getCurrentProjectName, TasksUI.renderTasksList);
+
+window.addEventListener('click', (e) => {
+  if (
+    e.target.closest('#add-project-btn') ||
+    e.target.closest('#add-task-btn') ||
+    e.target.closest('.task-item') ||
+    e.target.closest('.project-item')
+  ) return;
+
+  if (e.target.closest('form')) return;
+
+  const modals = document.querySelectorAll('dialog');
+
+  modals.forEach((modal) => {
+    if (!modal.open) return;
+
+    const rect = modal.getBoundingClientRect();
+    const clickedInside =
+      e.clientX >= rect.left &&
+      e.clientX <= rect.right &&
+      e.clientY >= rect.top &&
+      e.clientY <= rect.bottom;
+
+    if (!clickedInside) {
+      modal.close();
+      const form = modal.querySelector('form');
+      if (form) form.reset();
+    }
+  });
+});
