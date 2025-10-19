@@ -4,7 +4,7 @@ import { saveData } from '../Data/storageManager.js';
 let taskModalEl = null;
 let addTaskBtnEl = null;
 let formEl = null;
-let cancelBtnEl = null;
+let deleteBtnEl = null;
 
 let getCurrentProjectName = null;
 let refreshTasksCallback = null;
@@ -17,13 +17,38 @@ function initTasksFormUI(getProjectNameFn, refreshCb) {
   taskModalEl = document.getElementById('task-modal');
   addTaskBtnEl = document.getElementById('add-task-btn');
   formEl = document.getElementById('add-task-form');
-  cancelBtnEl = document.querySelectorAll('.task-cancel-btn');
+  deleteBtnEl = document.getElementById('delete-task-btn');
 
   if (!formEl || !taskModalEl || !addTaskBtnEl) return;
 
-  addTaskBtnEl.addEventListener('click', () => openTaskModal(null));
-  cancelBtnEl.forEach(btn => btn.addEventListener('click', closeModal));
+  addTaskBtnEl.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openTaskModal(null);
+  });
+
+  const cancelBtnEl = document.getElementById('task-cancel-btn');
+  if (cancelBtnEl) {
+    cancelBtnEl.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeModal();
+    });
+  }
+
   formEl.addEventListener('submit', handleSubmit);
+
+  if (deleteBtnEl) {
+    deleteBtnEl.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!editingTask) return;
+      const projectName = getCurrentProjectName && getCurrentProjectName();
+      if (!projectName) return;
+      if (!confirm('Sure?')) return;
+      TaskManager.deleteTaskFromProject(projectName, editingTask.id);
+      saveData();
+      if (refreshTasksCallback) refreshTasksCallback(projectName);
+      closeModal();
+    });
+  }
 }
 
 function openTaskModal(task = null) {
@@ -36,34 +61,12 @@ function openTaskModal(task = null) {
     formEl['dueDate'].value = task.dueDate || '';
     formEl['priority'].value = task.priority || 'Medium';
     formEl['taskStatus'].value = task.taskStatus || 'To Do';
+    if (deleteBtnEl) deleteBtnEl.style.display = 'inline-flex';
   } else {
     formEl.reset();
     formEl['taskStatus'].value = 'To Do';
     formEl['priority'].value = 'Medium';
-  }
-
-  const existingDeleteBtn = formEl.querySelector('.delete-task-btn');
-  if (existingDeleteBtn) existingDeleteBtn.remove();
-
-  if (task) {
-    const deleteBtn = document.createElement('button');
-    deleteBtn.type = 'button';
-    deleteBtn.textContent = '🗑';
-    deleteBtn.classList.add('delete-task-btn');
-
-    deleteBtn.addEventListener('click', () => {
-      if (confirm('Sure?')) {
-        const projectName = getCurrentProjectName && getCurrentProjectName();
-        if (projectName) {
-          TaskManager.deleteTaskFromProject(projectName, task.id);
-          saveData();
-          if (refreshTasksCallback) refreshTasksCallback(projectName);
-          closeModal();
-        }
-      }
-    });
-
-    formEl.appendChild(deleteBtn);
+    if (deleteBtnEl) deleteBtnEl.style.display = 'none';
   }
 
   if (typeof taskModalEl.showModal === 'function') {
@@ -77,8 +80,6 @@ function closeModal() {
   if (!formEl || !taskModalEl) return;
   formEl.reset();
   editingTask = null;
-  const existingDeleteBtn = formEl.querySelector('.delete-task-btn');
-  if (existingDeleteBtn) existingDeleteBtn.remove();
   if (typeof taskModalEl.close === 'function') {
     taskModalEl.close();
   } else {
@@ -101,7 +102,7 @@ function handleSubmit(e) {
     description: formEl['description'].value.trim(),
     dueDate: formEl['dueDate'].value || '',
     priority: formEl['priority'].value || 'Medium',
-    taskStatus: formEl['taskStatus'].value || 'To Do'
+    taskStatus: formEl['taskStatus'].value || 'To Do',
   };
 
   if (!data.taskName) {

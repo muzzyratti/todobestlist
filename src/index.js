@@ -73,32 +73,19 @@ function getCurrentProjectName() {
 ProjectsFormUI.initProjectsFormUI(selectProject, refreshProjectsList);
 TasksFormUI.initTasksFormUI(getCurrentProjectName, TasksUI.renderTasksList);
 
-window.addEventListener('click', (e) => {
-  if (
-    e.target.closest('#add-project-btn') ||
-    e.target.closest('#add-task-btn') ||
-    e.target.closest('.task-item') ||
-    e.target.closest('.project-item')
-  ) return;
+// --- Backdrop close: closing modals ---
+function enableBackdropClose(dialogId, formId) {
+  const dialog = document.getElementById(dialogId) || document.querySelector(dialogId);
+  if (!dialog) return;
+  const form = formId ? document.getElementById(formId) : dialog.querySelector('form');
 
-  if (e.target.closest('form')) return;
-
-  const modals = document.querySelectorAll('dialog');
-
-  modals.forEach((modal) => {
-    if (!modal.open) return;
-
-    const rect = modal.getBoundingClientRect();
-    const clickedInside =
-      e.clientX >= rect.left &&
-      e.clientX <= rect.right &&
-      e.clientY >= rect.top &&
-      e.clientY <= rect.bottom;
-
-    if (!clickedInside) {
-      modal.close();
-      const form = modal.querySelector('form');
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog) {
+      dialog.close();
       if (form) form.reset();
     }
   });
-});
+}
+
+enableBackdropClose('task-modal', 'add-task-form');
+enableBackdropClose('project-modal', 'add-project-form');
