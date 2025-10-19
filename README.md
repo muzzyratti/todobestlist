@@ -1,4 +1,8 @@
-# Template for webdev
-npm config
-webpack config + plugins (load html, css) + rules (load images) + server
-src directory with clean template.html, index.js, styles.css
+# Man, just do it
+Educational project during theodinproject.com JS course.\
+To Do board simple task. What I've learnt:\
+- Save/Load from localStorage
+- Devide modules of code by Data, Logic, UI layers
+- SOLID principles
+- Using wepback
+- Vibecoding
