@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<script defer src="main.js"></script></head>
+<body>
+    <div id="app">
+        <div class="nav">
+
+            <div class="nav-header">
+                <h1>Man, just do it</h1>
+            </div>
+        </div>
+        
+        <div class="main-content">
+
+            <div class="sidebar-projects">
+                <h2>Projects</h2>
+                <button id="add-project-btn" class="primary-btn">Add+</button>
+                <ul id="project-list">
+                    <!-- Project items will be dynamically added here -->
+                </ul>
+            </div>
+
+            <div class="tasks-section">
+
+                <h2 id="current-project-name">Tasks</h2>
+                <button id="add-task-btn" class="primary-btn">Add+</button>
+                <div class="tasklists">
+                     <div class="to-do-list">
+                        <h2>To Do</h2>
+                        <ul id="to-do-list">
+                            <!-- To-do task items will be dynamically added here -->
+                        </ul>
+                     </div>
+
+                <div class="in-progress-list">
+                    <h2>In Progress</h2>
+                    <ul id="in-progress-list">
+                        <!-- In-progress task items will be dynamically added here -->
+                    </ul>
+                </div>
+
+                <div class="done-list">
+                    <h2>Done</h2>
+                    <ul id="done-list">
+                        <!-- Done task items will be dynamically added here -->
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <dialog id="project-modal">
+        <form method="dialog" id="add-project-form">
+            <div>
+                <label for="project-name">Project Name <span>*</span></label>
+                <input type="text" id="project-name" name="project-name" required>
+            </div>
+            
+            <div>
+                <button type="submit" class="add-btns">Save Project</button>
+                <button type="button" class="project-cancel-btn">Cancel</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog id="task-modal">
+        <form method="dialog" id="add-task-form">
+            <div>
+                <label for="task-name">Task Name <span>*</span></label>
+                <input type="text" name="task-name" id="task-name" required>
+            </div>
+            
+            <div>
+                <label for="description">Description</label>
+                <textarea name="description" id="description"></textarea>
+            </div>
+            <div>
+                <label for="dueDate">Due Date</label>
+                <input type="date" name="dueDate" id="dueDate">
+            </div>
+            <div>
+                <label for="priority">Priority</label>
+                <select name="priority" id="priority">
+                    <option value="Low">Low</option>
+                    <option value="Medium" selected>Medium</option>
+                    <option value="High">High</option>
+                </select>
+            </div>
+            <div>
+                <label for="taskStatus">Status</label>
+                <select name="taskStatus" id="taskStatus">
+                    <option value="To Do" selected>To do</option>
+                    <option value="In Progress">In progress</option>
+                    <option value="Done">Done</option>
+                </select>
+            </div>
+            <div class="task-modal-actions">
+                <div class="left-buttons">
+                    <button type="submit" class="add-btns">Save Task</button>
+                    <button type="button" id="task-cancel-btn" class="cancel-btns">Cancel</button>
+                </div>
+                <button type="button" id="delete-task-btn" class="delete-task-btn">🗑️</button>
+            </div>
+        </form>
+    </dialog>
+
+</body>
+</html>
